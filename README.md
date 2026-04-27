@@ -5,7 +5,7 @@ Open-source Python CLI for local validator onboarding checks. It emits machine-r
 ## Install from source
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/johanstrubs/validator-local-preflight-cli.git
 cd validator-local-preflight-cli
 python3 -m venv .venv
 source .venv/bin/activate
