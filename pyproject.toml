@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "validator-local-preflight"
+version = "0.1.0"
+description = "Local preflight CLI for Post Fiat validator readiness checks"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Snakespartan" }
+]
+dependencies = [
+  "httpx>=0.28,<0.29",
+]
+
+[project.scripts]
+validator-preflight = "validator_preflight.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

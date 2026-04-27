@@ -1,0 +1,50 @@
+{
+  "checks": [
+    {
+      "category": "core",
+      "detected_value": "ConnectError: All connection attempts failed",
+      "expected_value": "server_info responds within 10 seconds",
+      "name": "RPC reachability",
+      "remediation": "Confirm the RPC URL, host reachability, reverse proxy, and local validator process before retrying.",
+      "status": "fail"
+    },
+    {
+      "category": "core",
+      "detected_value": "RPC unavailable",
+      "expected_value": "proposing or full",
+      "name": "Server state",
+      "remediation": "Fix RPC reachability first.",
+      "status": "skip"
+    },
+    {
+      "category": "local",
+      "detected_value": "port 2559 not present in listening sockets",
+      "expected_value": "port 2559 listening on a local interface",
+      "name": "Peer port 2559 listening",
+      "remediation": "Start or reconfigure postfiatd so the peer port is exposed locally, then verify any reverse proxy or host-networking setup.",
+      "status": "fail"
+    },
+    {
+      "category": "local",
+      "detected_value": "no supported firewall tool found",
+      "expected_value": "best-effort confirmation that tcp/2559 is not blocked",
+      "name": "Firewall accessibility",
+      "remediation": "Run the firewall check on a Linux host with `ufw`, `nft`, `iptables`, or `firewall-cmd`, or review cloud firewall settings manually.",
+      "status": "skip"
+    },
+    {
+      "category": "upload",
+      "detected_value": "https://collector.example.com timed out",
+      "expected_value": "successful HTTPS POST within 10 seconds",
+      "name": "Upload report",
+      "remediation": "The preflight run is still valid locally. Check the remote endpoint, auth expectations, TLS, and network egress before retrying upload.",
+      "status": "warn"
+    }
+  ],
+  "domain": "validator.example.com",
+  "full": true,
+  "generated_at": "2026-04-27T12:00:00+00:00",
+  "rpc_endpoint": "http://127.0.0.1:5005",
+  "tool": "validator-local-preflight",
+  "version": "0.1.0"
+}

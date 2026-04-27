@@ -1,0 +1,143 @@
+Command:
+
+```bash
+validator-preflight http://127.0.0.1:5005 --full
+```
+
+Captured stderr:
+
+```text
+Validator Local Preflight Summary
+pass=5 warn=1 fail=0 skip=6
+
+[PASS] RPC reachability: server_info responded (expected server_info responds within 10 seconds)
+[PASS] Server state: full (expected proposing or full)
+[WARN] Version freshness: 1.0.0 (expected 3.0.0)
+  remediation: Upgrade to the current cohort version. Illustrative example: `docker compose pull && docker compose up -d`.
+[PASS] Validated ledger age: 2.0s (expected <= 10.0s)
+[PASS] Peer count: 21 (expected >= 5 peers)
+[SKIP] Peer port 2559 listening: no supported socket tool found (expected ss or netstat available for socket inspection)
+  remediation: Install `ss` or `netstat`, or inspect listening sockets manually if your environment hides host networking details.
+[SKIP] Firewall accessibility: no supported firewall tool found (expected best-effort confirmation that tcp/2559 is not blocked)
+  remediation: Run the firewall check on a Linux host with `ufw`, `nft`, `iptables`, or `firewall-cmd`, or review cloud firewall settings manually.
+[SKIP] Crawl pubkey_validator: nHD3sPmhNtVXTXrZAGhsfHRhxhzFXKHNNxemTtGFr69SRd9q88dZ (expected server_info exposes pubkey_validator for comparison)
+  remediation: The crawl endpoint responded, but server_info did not expose pubkey_validator. Treat this as advisory and confirm key mapping manually if needed.
+[SKIP] Docker container status: docker not installed (expected running postfiatd container with restart policy)
+  remediation: Install Docker or run the CLI on the validator host if you want container-specific checks.
+[SKIP] Docker restart policy: docker not installed (expected restart policy of unless-stopped or always)
+  remediation: Install Docker or run the CLI on the validator host if you want container-specific checks.
+[PASS] Free disk space: 117.4 GB free (expected >= 10.0 GB free)
+[SKIP] Upload report: no --upload-url provided (expected optional HTTPS endpoint provided by the caller)
+  remediation: Pass --upload-url https://example.com/endpoint if you want to forward the full JSON report.
+```
+
+Captured stdout:
+
+```json
+{
+  "checks": [
+    {
+      "category": "core",
+      "detected_value": "server_info responded",
+      "expected_value": "server_info responds within 10 seconds",
+      "name": "RPC reachability",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "full",
+      "expected_value": "proposing or full",
+      "name": "Server state",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "1.0.0",
+      "expected_value": "3.0.0",
+      "name": "Version freshness",
+      "remediation": "Upgrade to the current cohort version. Illustrative example: `docker compose pull && docker compose up -d`.",
+      "status": "warn"
+    },
+    {
+      "category": "core",
+      "detected_value": "2.0s",
+      "expected_value": "<= 10.0s",
+      "name": "Validated ledger age",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "21",
+      "expected_value": ">= 5 peers",
+      "name": "Peer count",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "local",
+      "detected_value": "no supported socket tool found",
+      "expected_value": "ss or netstat available for socket inspection",
+      "name": "Peer port 2559 listening",
+      "remediation": "Install `ss` or `netstat`, or inspect listening sockets manually if your environment hides host networking details.",
+      "status": "skip"
+    },
+    {
+      "category": "local",
+      "detected_value": "no supported firewall tool found",
+      "expected_value": "best-effort confirmation that tcp/2559 is not blocked",
+      "name": "Firewall accessibility",
+      "remediation": "Run the firewall check on a Linux host with `ufw`, `nft`, `iptables`, or `firewall-cmd`, or review cloud firewall settings manually.",
+      "status": "skip"
+    },
+    {
+      "category": "extended",
+      "detected_value": "nHD3sPmhNtVXTXrZAGhsfHRhxhzFXKHNNxemTtGFr69SRd9q88dZ",
+      "expected_value": "server_info exposes pubkey_validator for comparison",
+      "name": "Crawl pubkey_validator",
+      "remediation": "The crawl endpoint responded, but server_info did not expose pubkey_validator. Treat this as advisory and confirm key mapping manually if needed.",
+      "status": "skip"
+    },
+    {
+      "category": "extended",
+      "detected_value": "docker not installed",
+      "expected_value": "running postfiatd container with restart policy",
+      "name": "Docker container status",
+      "remediation": "Install Docker or run the CLI on the validator host if you want container-specific checks.",
+      "status": "skip"
+    },
+    {
+      "category": "extended",
+      "detected_value": "docker not installed",
+      "expected_value": "restart policy of unless-stopped or always",
+      "name": "Docker restart policy",
+      "remediation": "Install Docker or run the CLI on the validator host if you want container-specific checks.",
+      "status": "skip"
+    },
+    {
+      "category": "extended",
+      "detected_value": "117.4 GB free",
+      "expected_value": ">= 10.0 GB free",
+      "name": "Free disk space",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "upload",
+      "detected_value": "no --upload-url provided",
+      "expected_value": "optional HTTPS endpoint provided by the caller",
+      "name": "Upload report",
+      "remediation": "Pass --upload-url https://example.com/endpoint if you want to forward the full JSON report.",
+      "status": "skip"
+    }
+  ],
+  "domain": null,
+  "full": true,
+  "generated_at": "2026-04-27T18:58:27.261974+00:00",
+  "rpc_endpoint": "http://127.0.0.1:5005",
+  "tool": "validator-local-preflight",
+  "version": "0.1.0"
+}
+```

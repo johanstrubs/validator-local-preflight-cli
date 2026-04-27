@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "category": "core",
+      "detected_value": "server_info responded",
+      "expected_value": "server_info responds within 10 seconds",
+      "name": "RPC reachability",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "proposing",
+      "expected_value": "proposing or full",
+      "name": "Server state",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "1.0.0",
+      "expected_value": "1.0.0",
+      "name": "Version freshness",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "3.0s",
+      "expected_value": "<= 10.0s",
+      "name": "Validated ledger age",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "core",
+      "detected_value": "12",
+      "expected_value": ">= 5 peers",
+      "name": "Peer count",
+      "remediation": "",
+      "status": "pass"
+    },
+    {
+      "category": "upload",
+      "detected_value": "no --upload-url provided",
+      "expected_value": "optional HTTPS endpoint provided by the caller",
+      "name": "Upload report",
+      "remediation": "Pass --upload-url https://example.com/endpoint if you want to forward the full JSON report.",
+      "status": "skip"
+    }
+  ],
+  "domain": null,
+  "full": false,
+  "generated_at": "2026-04-27T12:00:00+00:00",
+  "rpc_endpoint": "http://127.0.0.1:5005",
+  "tool": "validator-local-preflight",
+  "version": "0.1.0"
+}
